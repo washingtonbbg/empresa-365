@@ -59,6 +59,11 @@ def test_generate_loja_primavera_day(client):
         assert movement["classification"] in allowed
         assert movement["pedagogical_observation"]
         assert movement["document"]["disclaimer"] == "SIMULAÇÃO EDUCACIONAL"
+        assert movement["document"]["id"] > 0
+
+    document = client.get(f"/api/v1/documents/{result['movements'][0]['document']['id']}")
+    assert document.status_code == 200
+    assert "SIMULAÇÃO EDUCACIONAL" in document.text
 
 
 def test_primavera_rejects_invalid_count(client):

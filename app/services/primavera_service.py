@@ -109,6 +109,7 @@ def generate_primavera_day(db: Session, simulation_date: date, count: int | None
             "payment_date": transaction.payment_date.isoformat() if transaction.payment_date else None,
             "status": transaction.status,
             "document": {
+                "id": document.id,
                 "type": document.document_type,
                 "educational_number": document.educational_number,
                 "file_path": document.file_path,

@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.pnpm-store/
 .venv/
 venv/
 .env
@@ -9,4 +10,3 @@ storage/documents/*.html
 storage/exports/*
 !storage/documents/.gitkeep
 !storage/exports/.gitkeep
-

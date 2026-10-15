@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, selectinload
 
 from app.core.database import get_db
-from app.models import AccountPayable, AccountReceivable, Company, Scenario, SimulationDay, Transaction
+from app.models import AccountPayable, AccountReceivable, Company, Document, Scenario, SimulationDay, Transaction
 from app.schemas.company import CompanyCreate, CompanyRead
 from app.schemas.scenario import DayGenerateRequest, DayRead, PrimaveraDayRequest, ScenarioCreate, ScenarioRead
 from app.services.export_service import export_csv, export_xlsx
@@ -21,6 +21,15 @@ router = APIRouter(prefix="/api/v1")
 def list_document_templates():
     """Lista os modelos HTML disponíveis e sua finalidade pedagógica."""
     return {"templates": template_catalog(), "disclaimer": "SIMULAÇÃO EDUCACIONAL"}
+
+
+@router.get("/documents/{document_id}", tags=["Documentos simulados"])
+def download_document(document_id: int, db: Session = Depends(get_db)):
+    document = db.get(Document, document_id)
+    if not document:
+        raise HTTPException(404, "Documento não encontrado.")
+    return FileResponse(document.file_path, media_type=document.mime_type,
+                        filename=f"{document.document_type}-{document.educational_number}.html")
 
 
 def get_scenario_or_404(db: Session, scenario_id: int) -> Scenario:

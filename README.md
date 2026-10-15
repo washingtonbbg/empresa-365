@@ -20,6 +20,7 @@ Professores e estudantes do Ensino Médio Técnico em Administração, especialm
 - fluxo de caixa, mini DRE, contas a pagar e contas a receber;
 - exportação de movimentações em CSV e XLSX;
 - documentação interativa automática (Swagger e ReDoc);
+- painel web do professor para gerar o dia, consultar indicadores e abrir documentos;
 - testes automatizados dos principais fluxos.
 
 ## Tecnologias
@@ -31,6 +32,7 @@ Professores e estudantes do Ensino Médio Técnico em Administração, especialm
 - openpyxl para arquivos XLSX;
 - módulo `csv` nativo do Python para arquivos CSV;
 - HTML e CSS para documentos imprimíveis.
+- React/Vinext para a interface do professor.
 
 ## Status
 
@@ -97,6 +99,18 @@ Acesse:
 - Swagger: <http://127.0.0.1:8000/docs>
 - ReDoc: <http://127.0.0.1:8000/redoc>
 - Saúde da aplicação: <http://127.0.0.1:8000/health>
+
+### Interface do professor
+
+Com a API em execução, abra outro terminal:
+
+```powershell
+cd frontend
+pnpm install
+pnpm run dev
+```
+
+Acesse <http://localhost:3000>. O painel permite escolher a data, gerar o dia da Loja Primavera, acompanhar saldos e movimentações, abrir os documentos HTML e consultar as observações pedagógicas. Requer Node.js 22.13 ou superior e pnpm 11.
 
 O Alembic cria ou atualiza o banco `empresa365.db`; as pastas de armazenamento são preparadas automaticamente pela aplicação. Execute `alembic upgrade head` sempre que receber uma nova versão do projeto.
 
